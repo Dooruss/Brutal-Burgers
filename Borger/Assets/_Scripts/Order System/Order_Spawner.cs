@@ -38,7 +38,7 @@ public class Order_Spawner : MonoBehaviour
         {
             if (i > 0)
             {
-                CurrentCustomers[i].transform.position = new Vector3(CurrentCustomers[0].transform.position.x * i - 1000,
+                CurrentCustomers[i].transform.position = new Vector3(CurrentCustomers[0].transform.position.x - 1000 * i,
                     Canvas.transform.position.y - Canvas.transform.lossyScale.y / 2, 0);
             }
             else
