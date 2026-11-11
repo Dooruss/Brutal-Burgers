@@ -176,6 +176,7 @@ MonoBehaviour:
   OrderParent: {fileID: 5134080414647032350}
   Loadbar: {fileID: 4187491035033937827}
   Base_OrderTime: 15
+  OrderValue: 100
 --- !u!1 &4058484949946092785
 GameObject:
   m_ObjectHideFlags: 0
