@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class Customer_Script : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Customer_Script : MonoBehaviour
     [Tooltip("Time u can take to complete the order")]
     [SerializeField] private float Base_OrderTime;
     private float OrderTime;
+    [SerializeField] private int OrderValue;
 
     void Start()
     {
@@ -44,7 +46,7 @@ public class Customer_Script : MonoBehaviour
             //Toppings
             for (int i = 1; i < Current_Orders.Count - 1; i++)
             {
-                int RandomTopping = Random.Range(0, Ingredients.Length);
+                int RandomTopping = UnityEngine.Random.Range(0, Ingredients.Length);
                 Current_Orders[i].sprite = Ingredients[RandomTopping];
             }
             Current_Orders[Current_Orders.Count - 1].sprite = Buns[1];
@@ -74,7 +76,11 @@ public class Customer_Script : MonoBehaviour
 
     private void DestroyOrder(bool isServed)
     {
-        if (isServed) { print("YOU SERVED"); }
+        if (isServed) {
+            Shifts_System Instance = FindObjectOfType<Shifts_System>();
+            Instance.CurrentValue += OrderValue;
+            print("YOU SERVED"); 
+        }
         Destroy(Order_Block);
     }
     #endregion
