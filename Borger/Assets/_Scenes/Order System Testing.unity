@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Order_Spawner
   CustomerModels:
+  - {fileID: 2486502608035646904, guid: c58baf24446a7a944a1aab8db44f48a2, type: 3}
   - {fileID: 3353034683591004386, guid: b39c6394f07aebd42a6f0033f1195694, type: 3}
+  - {fileID: 4331292599258608803, guid: 50e39081e1f1cb04aafc72d46e00942f, type: 3}
   CurrentCustomers: []
   Canvas: {fileID: 995164559}
   MaxCustomers: 3
