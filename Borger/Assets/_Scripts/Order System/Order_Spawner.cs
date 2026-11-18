@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Order_Spawner : MonoBehaviour
 {
@@ -10,11 +11,22 @@ public class Order_Spawner : MonoBehaviour
 
     [Header("Cooldowns & max")]
     [SerializeField] private int MaxCustomers = 3;
-    [SerializeField] float baseCooldown = 10;
+    [SerializeField] public float baseCooldown = 20;
     private float SpawnCooldown = 1f;
     private float CooldownMultiplier = 1;
+    Order_Spawner Instance;
 
-
+    private void Start()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Update()
     {
         SpawnCooldown -= Time.deltaTime;
