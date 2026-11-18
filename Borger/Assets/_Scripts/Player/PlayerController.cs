@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -18,7 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private InputAction moveInput;
     private InputAction runInput;
-    private InputAction jumpInput;
+    //private InputAction jumpInput;
+    private InputAction clickInput;
 
     private float currentMoveSpeed = 0f;
     private Vector3 moveDirection = Vector3.zero;
@@ -33,7 +35,8 @@ public class PlayerController : MonoBehaviour
 
         moveInput = InputSystem.actions.FindAction("Move");
         runInput = InputSystem.actions.FindAction("Sprint");
-        jumpInput = InputSystem.actions.FindAction("Jump");
+        //jumpInput = InputSystem.actions.FindAction("Jump");
+        clickInput = InputSystem.actions.FindAction("Interact");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -90,4 +93,8 @@ public class PlayerController : MonoBehaviour
     //    jumped = true;
     //}
 
+    private void PickUp(Vector2 mouseDelta) 
+    {
+        
+    }
 }
