@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float WalkSpeed = 5.5f;
     [SerializeField] private float RunningSpeed = 9.0f;
 
-    [SerializeField] private float JumpForce = 8.0f;
+    //[SerializeField] private float JumpForce = 8.0f;
     [SerializeField] private float Gravity = 20.0f;
 
     [SerializeField] private float LookSensitivity = 0.2f;
