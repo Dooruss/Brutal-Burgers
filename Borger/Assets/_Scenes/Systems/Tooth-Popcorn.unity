@@ -489,7 +489,7 @@ Transform:
   m_GameObject: {fileID: 688992117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.15, y: 0.43, z: -1.01}
+  m_LocalPosition: {x: 2.15, y: -0.53, z: -1.01}
   m_LocalScale: {x: 25.08576, y: 0.32454592, z: 25.08576}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TeethPopcorn
   ToothPrefab: {fileID: 1024847015009581822, guid: 6c8e9ed9cf419e043b038f81b677bd27, type: 3}
   ToothSpawnPoint: {fileID: 1219235014}
-  moveSpeed: 4
+  moveSpeed: 8
   shakeThreshold: 1
 --- !u!65 &1728398983
 BoxCollider:
@@ -650,7 +650,7 @@ Transform:
   m_GameObject: {fileID: 1728398981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 1.31, z: -7.77}
+  m_LocalPosition: {x: 0.06, y: 1.31, z: -7.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
