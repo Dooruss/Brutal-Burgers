@@ -1,0 +1,123 @@
+using UnityEngine;
+
+public class TeethPopcorn : MonoBehaviour
+{
+	[Header("Tooth Spawning")]
+	[SerializeField] private GameObject ToothPrefab;
+	[SerializeField] private Transform ToothSpawnPoint;
+
+	// Time between each tooth falling out while the skull is moving.
+	[SerializeField] private float toothDropInterval = 0.2f;
+
+	[Header("Movement")]
+	public Vector3 targetPos;
+	public float moveSpeed = 5f;
+
+	private bool isDragging;
+	private float toothDropTimer;
+
+	// Keeps the mouse from snapping the skull's center directly to the mouse.
+	private Vector3 mouseOffset;
+
+	private Camera mainCamera;
+
+	private void Start()
+	{
+		mainCamera = Camera.main;
+		targetPos = transform.position;
+	}
+
+	private void Update()
+	{
+		// Stop dragging if the left mouse button is released.
+		if (isDragging && !Input.GetMouseButton(0))
+		{
+			isDragging = false;
+		}
+
+		if (!isDragging)
+		{
+			return;
+		}
+
+		// Get the position of the mouse in the game's world space.
+		Vector3 mouseWorldPosition = GetMouseWorldPosition();
+
+		// Move the skull toward the mouse position.
+		targetPos = mouseWorldPosition + mouseOffset;
+		transform.position = Vector3.MoveTowards(
+			transform.position,
+			targetPos,
+			moveSpeed * Time.deltaTime
+		);
+
+		// While the skull is being moved, periodically drop teeth.
+		toothDropTimer -= Time.deltaTime;
+
+		if (toothDropTimer <= 0f)
+		{
+			LetToothFall();
+			toothDropTimer = toothDropInterval;
+		}
+	}
+
+	private void LetToothFall()
+	{
+		// Make sure both references have been assigned in the Inspector.
+		if (ToothPrefab == null || ToothSpawnPoint == null)
+		{
+			Debug.LogWarning(
+				"Assign ToothPrefab and ToothSpawnPoint on the TeethPopcorn object."
+			);
+
+			return;
+		}
+
+		Instantiate(
+			ToothPrefab,
+			ToothSpawnPoint.position,
+			ToothSpawnPoint.rotation
+		);
+
+		// TIP:
+		// Add a Rigidbody2D to the tooth prefab and enable Gravity Scale
+		// so the spawned tooth falls naturally.
+		//
+		// TIP:
+		// Add a Collider2D to the tooth prefab if it should collide with
+		// the ground or other objects.
+	}
+
+	private void OnMouseDown()
+	{
+		isDragging = true;
+		toothDropTimer = 0f;
+
+		// Calculate the offset between the skull and the mouse.
+		// This prevents the skull from jumping when dragging starts.
+		mouseOffset = transform.position - GetMouseWorldPosition();
+	}
+
+	private void OnMouseUp()
+	{
+		isDragging = false;
+	}
+
+	private Vector3 GetMouseWorldPosition()
+	{
+		Vector3 mouseScreenPosition = Input.mousePosition;
+
+		// Set the correct distance from the camera to the skull.
+		mouseScreenPosition.z = Mathf.Abs(
+			mainCamera.transform.position.z - transform.position.z
+		);
+
+		Vector3 mouseWorldPosition =
+			mainCamera.ScreenToWorldPoint(mouseScreenPosition);
+
+		// Keep the skull on the same 2D plane.
+		mouseWorldPosition.z = transform.position.z;
+
+		return mouseWorldPosition;
+	}
+}

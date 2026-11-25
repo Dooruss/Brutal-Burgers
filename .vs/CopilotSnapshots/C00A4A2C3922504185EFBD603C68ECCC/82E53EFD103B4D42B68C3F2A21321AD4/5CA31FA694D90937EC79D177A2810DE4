@@ -1,0 +1,61 @@
+﻿using System.Data;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android;
+using UnityEngine.InputSystem.iOS;
+using UnityEngine.InputSystem.LowLevel;
+
+public class TeethPopcorn : MonoBehaviour
+{
+    // To move the skull, make sure the skull has a Collider so Unity can detect clicks on it.
+    // You can move the skull either by changing transform.position directly or by adding a
+    // Rigidbody and moving it with Rigidbody.MovePosition. A Rigidbody is useful if the skull
+    // should also react to physics while it is being shaken.
+
+    [Header("Tooth Spawning")]
+    [SerializeField] private GameObject ToothPrefab;
+    [SerializeField] private Transform ToothSpawnPoint;
+
+    [Header("Movement")]
+    public Vector3 targetPos;
+    public float moveSpeed = 0.5f;
+
+    private void Update()
+    {
+        // While the skull is being held, save its current mouse position and move the skull
+        // toward the mouse. Usually this is done by raycasting from Camera.main to a plane
+        // in front of the camera, then assigning the hit point to transform.position.
+        //
+        // To detect a shake, compare the skull's current position with its position from the
+        // previous frame. Add the amount of movement to a shake counter. When the counter is
+        // greater than a chosen threshold, call LetToothFall() and reset the counter.
+        //
+        // Example flow:
+        // 1. If the skull is being dragged, calculate its mouse position.
+        // 2. Move the skull toward that position.
+        // 3. Add Vector3.Distance(currentPosition, previousPosition) to the shake amount.
+        // 4. If the shake amount is large enough, call LetToothFall().
+        // 5. Set previousPosition = currentPosition for the next frame.
+    }
+
+    void LetToothFall()
+    {
+        // This is the function that should be called when the shake amount reaches the
+        // required threshold. ToothPrefab should have a Rigidbody and Collider so the new
+        // tooth falls naturally after it is spawned at ToothSpawnPoint.
+        Instantiate(ToothPrefab, ToothSpawnPoint.position, Quaternion.identity);
+    }
+
+    private void OnMouseDown()
+    {
+        // Start moving the skull here by setting a bool such as isDragging = true.
+        // Also store the mouse position and the skull position so the skull does not jump
+        // when the player first clicks it.
+        //
+        // OnMouseDown only detects the beginning of the drag; it does not detect shaking.
+        // The movement/shake check belongs in Update while isDragging is true.
+        // Add an OnMouseUp method to set isDragging = false when the player releases the skull.
+        //
+        // In the Unity Inspector, assign ToothPrefab and ToothSpawnPoint before testing.
+    }
+}

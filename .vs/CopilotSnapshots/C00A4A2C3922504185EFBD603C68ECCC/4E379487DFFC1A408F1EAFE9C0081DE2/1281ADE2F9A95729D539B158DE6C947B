@@ -1,0 +1,32 @@
+﻿using System.Data;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android;
+using UnityEngine.InputSystem.iOS;
+using UnityEngine.InputSystem.LowLevel;
+
+public class TeethPopcorn : MonoBehaviour
+{
+    [Header("Tooth Spawning")]
+    [SerializeField] private GameObject ToothPrefab;
+    [SerializeField] private Transform ToothSpawnPoint;
+
+    [Header("Movement")]
+    public Vector3 targetPos;
+    public float moveSpeed = 0.5f;
+
+    private void Update()
+    {
+        
+    }
+
+    void LetToothFall()
+    {
+        Instantiate(ToothPrefab, ToothSpawnPoint.position, Quaternion.identity);
+    }
+
+    private void OnMouseDown()
+    {
+        
+    }
+}
