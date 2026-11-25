@@ -80,6 +80,6 @@ public class TeethPopcorn : MonoBehaviour
     {
         isDragging = false;
         shakeAmount = 0f;
-        previousMovement = Vector3.zero;
+        //previousMovement = Vector3.zero;
     }
 }
